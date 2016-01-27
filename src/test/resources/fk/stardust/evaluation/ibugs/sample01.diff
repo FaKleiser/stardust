@@ -1,0 +1,22 @@
+335,337c335,339
+&lt; 	
+&lt; 	private static int makePublic(int modifiers) {
+&lt; 		return (modifiers &amp; ~VISIBILITY) | Modifier.PUBLIC;
+---
+&gt; 	/**
+&gt; 	 * Makes public and non-final
+&gt; 	 */
+&gt; 	private static int makePublicNonFinal(int modifiers) {
+&gt; 		return (modifiers &amp; ~VISIBILITY &amp; ~Modifier.FINAL) | Modifier.PUBLIC;
+379c381
+&lt; 			makePublic(field.getModifiers()),
+---
+&gt; 			makePublicNonFinal(field.getModifiers()),
+392c394
+&lt; 		return new ResolvedMember(Member.FIELD, onClass, makePublic(field.getModifiers()),
+---
+&gt; 		return new ResolvedMember(Member.FIELD, onClass, makePublicNonFinal(field.getModifiers()),
+438c440
+&lt; 		int modifiers = makePublic(meth.getModifiers());
+---
+&gt; 		int modifiers = makePublicNonFinal(meth.getModifiers());

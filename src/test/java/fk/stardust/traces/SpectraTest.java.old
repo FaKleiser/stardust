@@ -1,0 +1,66 @@
+package fk.stardust.traces;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class SpectraTest {
+
+    @Test
+    public void addAndGetTraces() {
+        final Spectra<String> spectra = new Spectra<>();
+        spectra.addTrace(true);
+        spectra.addTrace(false);
+        spectra.addTrace(true);
+        spectra.addTrace(true);
+        spectra.addTrace(false);
+        Assert.assertEquals(spectra.getTraces().size(), 5);
+        Assert.assertEquals(spectra.getFailingTraces().size(), 2);
+        Assert.assertEquals(spectra.getSuccessfulTraces().size(), 3);
+    }
+
+    @Test
+    public void addNoTraces() {
+        final ISpectra<String> spectra = new Spectra<>();
+        Assert.assertEquals(spectra.getTraces().size(), 0);
+        Assert.assertEquals(spectra.getFailingTraces().size(), 0);
+        Assert.assertEquals(spectra.getSuccessfulTraces().size(), 0);
+    }
+
+    public void tryToClone() throws CloneNotSupportedException {
+        final Spectra<String> spectra = new Spectra<>();
+        spectra.addTrace(true);
+        spectra.addTrace(true);
+        spectra.addTrace(false);
+        spectra.getTraces().get(0).setInvolvement("node", true);
+        spectra.getTraces().get(1).setInvolvement("node", false);
+        spectra.getTraces().get(2).setInvolvement("node", false);
+
+        // assert clone went well
+        final Spectra<String> clone = spectra.clone();
+        Assert.assertTrue(clone.getTraces().get(0).isInvolved(clone.getNode("node")));
+        Assert.assertFalse(clone.getTraces().get(1).isInvolved(clone.getNode("node")));
+        Assert.assertFalse(clone.getTraces().get(2).isInvolved(clone.getNode("node")));
+
+        // modify clone
+        clone.getTraces().get(0).setInvolvement("node", false);
+        clone.getTraces().get(1).setInvolvement("node", true);
+        clone.getTraces().get(2).setInvolvement("node", true);
+
+        // assert original is unmodified
+        Assert.assertTrue(spectra.getTraces().get(0).isInvolved(spectra.getNode("node")));
+        Assert.assertFalse(spectra.getTraces().get(1).isInvolved(spectra.getNode("node")));
+        Assert.assertFalse(spectra.getTraces().get(2).isInvolved(spectra.getNode("node")));
+
+        // assert clone is modified
+        Assert.assertFalse(clone.getTraces().get(0).isInvolved(clone.getNode("node")));
+        Assert.assertTrue(clone.getTraces().get(1).isInvolved(clone.getNode("node")));
+        Assert.assertTrue(clone.getTraces().get(2).isInvolved(clone.getNode("node")));
+
+        // add new trace to clone
+        Assert.assertEquals(spectra.getTraces().size(), 3);
+        Assert.assertEquals(clone.getTraces().size(), 3);
+        clone.addTrace(false);
+        Assert.assertEquals(spectra.getTraces().size(), 3);
+        Assert.assertEquals(clone.getTraces().size(), 4);
+    }
+}

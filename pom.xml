@@ -1,0 +1,189 @@
+<!--
+  ~ This file is part of the "STARDUST" project.
+  ~
+  ~ (c) Fabian Keller <hello@fabian-keller.de>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+
+	<!-- PROJECT INFORMATION -->
+	<groupId>fk</groupId>
+	<artifactId>stardust</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>STARDUST</name>
+
+	<!-- DEVELOPERS -->
+	<developers>
+		<developer>
+			<id>fabiankeller</id>
+			<name>Fabian Keller</name>
+			<email>hello@fabian-keller.de</email>
+		</developer>
+	</developers>
+
+	<!-- PROJECT SETTINGS -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<!-- PROJECT DEPENDENCIES -->
+	<dependencies>
+
+		<!-- library dependencies -->
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- weka machine learning -->
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-dev</artifactId>
+			<version>3.7.10</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>LibSVM</artifactId>
+			<version>1.0.5</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>nz.ac.waikato.cms.weka</groupId>
+					<artifactId>weka-dev</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- QA dependencies -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8.5</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency>
+			<groupId>maven</groupId>
+			<artifactId>maven-checkstyle-plugin</artifactId>
+			<version>3.0.1</version>
+			<type>maven-plugin</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-pmd-plugin</artifactId>
+			<version>3.0.1</version>
+			<type>maven-plugin</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>findbugs-maven-plugin</artifactId>
+			<version>2.5.2</version>
+			<type>maven-plugin</type>
+			<scope>test</scope>
+		</dependency> -->
+	</dependencies>
+
+	<!-- BUILD PLUGINS -->
+	<build>
+		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>findbugs-maven-plugin</artifactId>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.14.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
+			<!-- Compiler Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+
+					<forceJavacCompilerUse>true</forceJavacCompilerUse>
+				</configuration>
+			</plugin>
+
+			<!-- Checkstyle -->
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<configLocation>${project.basedir}/config/quality-config/cs-conf.xml</configLocation>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>checkstyle</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+
+			<!-- Findbugs -->
+			<!-- <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<excludeFilterFile>${project.basedir}/config/quality-config/fb-filter.xml</excludeFilterFile>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>findbugs</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+		</plugins>
+	</build>
+</project>

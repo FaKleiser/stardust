@@ -1,0 +1,19 @@
+<!--
+  ~ This file is part of the "STARDUST" project.
+  ~
+  ~ (c) Fabian Keller <hello@fabian-keller.de>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="STARDUST TestSuite" verbose="1">
+	<test name="Regression">
+		<packages>
+			<package name="fk.stardust.traces" />
+			<package name="fk.stardust.provider" />
+		</packages>
+	</test>
+</suite>

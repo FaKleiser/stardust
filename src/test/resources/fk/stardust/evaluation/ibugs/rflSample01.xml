@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+  ~ This file is part of the "STARDUST" project.
+  ~
+  ~ (c) Fabian Keller <hello@fabian-keller.de>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<realFaults>
+	<!-- nothing inside -->
+	<bug id="102710" />
+	
+	<!-- empty file -->
+	<bug id="102711">
+		<file />
+	</bug>
+	
+	<!-- valid filename but no lines -->
+	<bug id="102712">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java" />
+	</bug>
+	
+	<!-- invalid filename but lines -->
+	<bug id="102713">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.xml">
+			<line comment="is now on else if" suspiciousness="high">1182</line>
+		</file>
+	</bug>
+	
+	<!-- no file extension -->
+	<bug id="102714">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver">
+			<line comment="is now on else if" suspiciousness="high">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line -->
+	<bug id="102715">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line comment="is now on else if" suspiciousness="high">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line, empty comment -->
+	<bug id="102716">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line comment="" suspiciousness="high">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line, missing comment -->
+	<bug id="102717">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line suspiciousness="high">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line, invalid suspiciousness -->
+	<bug id="102718">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line comment="added new else if branch" suspiciousness="franklySpeakingIAmUncertain">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line, missing suspiciousness -->
+	<bug id="102719">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line comment="added new else if branch">1182</line>
+		</file>
+	</bug>
+	
+	<!-- single file, single line, invalid line number -->
+	<bug id="102720">
+		<file name="org/aspectj/weaver/bcel/BcelWeaver.java">
+			<line comment="added new else if branch" suspiciousness="low">invalidLineNumber</line>
+		</file>
+	</bug>
+	
+	<!-- multi file, multi line -->
+	<bug id="102721">
+		<file name="org/aspectj/weaver/patterns/PointcutRewriter.java">
+			<line comment="added new else if branch" suspiciousness="high">114
+			</line>
+			<line comment="changed return value creation" suspiciousness="high">177
+			</line>
+		</file>
+		<file
+			name="org/aspectj/ajdt/internal/compiler/ast/ValidateAtAspectJAnnotationsVisitor.java">
+			<line comment="raised NPE" suspiciousness="high">243</line>
+		</file>
+	</bug>
+</realFaults>

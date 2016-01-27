@@ -47,7 +47,7 @@ public class CoberturaProviderTest {
         final ISpectra<String> s = c.loadSpectra();
 
         // assert loaded count is correct
-        Assert.assertEquals(s.getNodes().size(), 16246);
+        Assert.assertEquals(s.getNodes().size(), 16245);
         Assert.assertEquals(s.getTraces().size(), 1);
 
         // assert we have 3563 involved nodes

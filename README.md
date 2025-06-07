@@ -4,10 +4,20 @@ STARDUST is a framework for spectrum-based fault localization (SBFL).
 The framework was used to conduct experiments with SBFL during my bachelor thesis.
 
 
+## Requirements
+
+This project requires Java 17 or newer to build and run.
+
+
 ## Installation
 
 STARDUST uses [maven](https://maven.apache.org/) as its build tool.
 The `pom.xml` file contains all dependencies you need in order to run the framework.
+
+
+## Build Status
+
+This project uses GitHub Actions to automatically run tests and build the project upon commits and pull requests, ensuring code quality and integration.
 
 
 ## Theoretical Background

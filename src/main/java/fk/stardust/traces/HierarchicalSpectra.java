@@ -80,7 +80,7 @@ public class HierarchicalSpectra<P, C> extends Spectra<P> {
      */
     private Set<INode<C>> childrenOf(final INode<P> parent) {
         if (!this.relation.containsKey(parent)) {
-            this.relation.put(parent, new HashSet<INode<C>>());
+            this.relation.put(parent, new HashSet<>());
         }
         return this.relation.get(parent);
     }

@@ -341,7 +341,7 @@ public class Ranking<T> implements Iterable<INode<T>> {
          * @return minWastedEffort
          */
         public double getMinWastedEffort() {
-            return new Double(this.bestRanking - 1) / new Double(Ranking.this.nodes.size());
+            return (double) (this.bestRanking - 1) / (double) Ranking.this.nodes.size();
         }
 
         /**
@@ -350,7 +350,7 @@ public class Ranking<T> implements Iterable<INode<T>> {
          * @return maxWastedEffort
          */
         public double getMaxWastedEffort() {
-            return new Double(this.worstRanking - 1) / new Double(Ranking.this.nodes.size());
+            return (double) (this.worstRanking - 1) / (double) Ranking.this.nodes.size();
         }
 
         /**

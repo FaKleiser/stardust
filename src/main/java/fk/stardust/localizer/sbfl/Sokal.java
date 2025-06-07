@@ -28,8 +28,8 @@ public class Sokal<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        return new Double(2.0d * (node.getIF() + node.getNS()))
-                / new Double(2.0d * (node.getIF() + node.getNS()) + node.getNF() + node.getIS());
+        return (2.0d * (node.getIF() + node.getNS()))
+                / (2.0d * (node.getIF() + node.getNS()) + node.getNF() + node.getIS());
     }
 
     @Override

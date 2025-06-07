@@ -28,8 +28,8 @@ public class Rogot1<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        final double left = new Double(node.getIF()) / new Double(2.0d * node.getIF() + node.getNF() + node.getIS());
-        final double right = new Double(node.getNS()) / new Double(2.0d * node.getNS() + node.getNF() + node.getIS());
+        final double left = (double) node.getIF() / (double) (2.0d * node.getIF() + node.getNF() + node.getIS());
+        final double right = (double) node.getNS() / (double) (2.0d * node.getNS() + node.getNF() + node.getIS());
         return 0.5d * (left + right);
     }
 

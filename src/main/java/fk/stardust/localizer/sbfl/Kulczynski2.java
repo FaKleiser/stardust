@@ -28,8 +28,8 @@ public class Kulczynski2<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        final Double left = new Double(node.getIF()) / new Double(node.getIF() + node.getNF());
-        final Double right = new Double(node.getIF()) / new Double(node.getIF() + node.getIS());
+        final double left = (double) node.getIF() / (double) (node.getIF() + node.getNF());
+        final double right = (double) node.getIF() / (double) (node.getIF() + node.getIS());
         return 0.5d * (left + right);
     }
 

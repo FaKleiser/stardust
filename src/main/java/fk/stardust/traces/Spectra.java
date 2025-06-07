@@ -87,7 +87,7 @@ public class Spectra<T> implements Cloneable, ISpectra<T> {
      */
     @Override
     public List<ITrace<T>> getTraces() {
-        return new ArrayList<ITrace<T>>(this.traces);
+        return new ArrayList<>(this.traces);
     }
 
     /**

@@ -149,8 +149,8 @@ public class SIRExperiment {
             final int cNF = Integer.parseInt(parts[3].trim());
 
             // tarantula
-            final double part = new Double(cIF) / new Double(cIF + cNF);
-            return part / new Double(part + cIP / new Double(cIP + cNP));
+            final double part = (double) cIF / (double) (cIF + cNF);
+            return part / (part + (double) cIP / (double) (cIP + cNP));
         }
 
         public Ranking<Integer> getRanking() {

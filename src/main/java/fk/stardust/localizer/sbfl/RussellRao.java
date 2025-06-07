@@ -28,7 +28,7 @@ public class RussellRao<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        return new Double(node.getIF()) / new Double(node.getIF() + node.getNF() + node.getIS() + node.getNS());
+        return (double) node.getIF() / (double) (node.getIF() + node.getNF() + node.getIS() + node.getNS());
     }
 
     @Override

@@ -158,8 +158,7 @@ public class FusingFaultLocalizer<T> implements IFaultLocalizer<T> {
         }
 
         // compute top-K nodes per ranking metric
-        final int k = new Double(spectra.getNodes().size() * 0.1 < 10 ? 10 : spectra.getNodes().size() * 0.1)
-        .intValue();
+        final int k = (int) (spectra.getNodes().size() * 0.1 < 10 ? 10 : spectra.getNodes().size() * 0.1);
         final Map<IFaultLocalizer<T>, Set<INode<T>>> topK = this.topK(sbflRankings, k);
 
 
@@ -242,7 +241,7 @@ public class FusingFaultLocalizer<T> implements IFaultLocalizer<T> {
         final Map<IFaultLocalizer<T>, Double> sortby = new HashMap<>();
         for (final IFaultLocalizer<T> fl : rankings.keySet()) {
             // score
-            final double oRate = new Double(all.size() - topK.get(fl).size()) / new Double(all.size());
+            final double oRate = (double) (all.size() - topK.get(fl).size()) / (double) all.size();
             sortby.put(fl, oRate);
         }
 
@@ -288,7 +287,7 @@ public class FusingFaultLocalizer<T> implements IFaultLocalizer<T> {
                 numSum += lAll.get(curNode);
             }
 
-            bias.put(fl, 1.0d - new Double(numSum) / (Math.sqrt(new Double(lSum)) * Math.sqrt(new Double(lAllSum))));
+            bias.put(fl, 1.0d - (double) numSum / (Math.sqrt((double) lSum) * Math.sqrt((double) lAllSum)));
         }
 
         // select'em

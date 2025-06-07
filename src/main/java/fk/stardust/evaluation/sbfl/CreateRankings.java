@@ -23,7 +23,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdom.JDOMException;
+import org.jdom2.JDOMException;
 
 import fk.stardust.evaluation.ibugs.Experiment;
 import fk.stardust.evaluation.ibugs.IBugsFaultLocations;
@@ -341,7 +341,7 @@ public class CreateRankings {
                 // existing benchmark
                 final long duration = now - this.benchmarks.get(id);
                 this.benchmarks.remove(id);
-                return String.format("%f s", new Double(duration / 1000.0d));
+                return String.format("%f s", duration / 1000.0d);
             } else {
                 this.benchmarks.put(id, now);
                 return null;

@@ -9,8 +9,7 @@
 
 package fk.stardust.util;
 
-import junit.framework.Assert;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class FileUtilsTest {

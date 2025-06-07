@@ -62,7 +62,7 @@ public final class LineEvaluator {
             System.out.println(String.format("-- Begin: %s", id));
         } else {
             final long duration = System.currentTimeMillis() - benchmarks.get(id);
-            System.out.println(String.format("-- End: %s, Duration: %fs", id, new Double(duration) / 1000d));
+            System.out.println(String.format("-- End: %s, Duration: %fs", id, (double) duration / 1000d));
             benchmarks.remove(id);
         }
     }

@@ -28,8 +28,8 @@ public class RogersTanimoto<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        return new Double(node.getIF() + node.getNS())
-                / new Double(node.getIF() + node.getNS() + 2.0d * (node.getNF() + node.getIS()));
+        return (double) (node.getIF() + node.getNS())
+                / (double) (node.getIF() + node.getNS() + 2.0d * (node.getNF() + node.getIS()));
     }
 
     @Override

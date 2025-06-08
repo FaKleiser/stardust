@@ -28,7 +28,7 @@ public class Overlap<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        return new Double(node.getIF()) / new Double(Math.min(node.getIF(), Math.min(node.getNF(), node.getIS())));
+        return (double) node.getIF() / (double) (Math.min(node.getIF(), Math.min(node.getNF(), node.getIS())));
     }
 
     @Override

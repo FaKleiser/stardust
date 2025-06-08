@@ -29,7 +29,7 @@ public class Wong3<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
     @Override
     public double suspiciousness(final INode<T> node) {
         if (node.getIS() <= 2) {
-            return node.getIS();
+            return (double) node.getIS(); // Cast to double for consistency, though int would auto-widen
         } else if (node.getIS() <= 10) {
             return 2.0d + 0.1d * (node.getIS() - 2.0d);
         } else {

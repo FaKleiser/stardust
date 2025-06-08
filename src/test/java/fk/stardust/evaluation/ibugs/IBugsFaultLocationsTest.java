@@ -11,9 +11,8 @@ package fk.stardust.evaluation.ibugs;
 
 import java.io.IOException;
 
-import junit.framework.Assert;
-
-import org.jdom.JDOMException;
+import org.testng.Assert;
+import org.jdom2.JDOMException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

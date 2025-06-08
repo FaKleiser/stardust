@@ -39,7 +39,7 @@ public final class CsvUtils {
      * @return the combined CSV string without trailing newline
      */
     public static String toCsvLine(final String[] parts) {
-        final StringBuffer line = new StringBuffer("");
+        final StringBuilder line = new StringBuilder("");
         for (final String part : parts) {
             if (line.length() > 0) {
                 line.append(CSV_DELIMITER);

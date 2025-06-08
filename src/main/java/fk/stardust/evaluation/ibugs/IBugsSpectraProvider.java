@@ -129,21 +129,18 @@ public class IBugsSpectraProvider implements ISpectraProvider<String> {
      */
     private Map<String, Boolean> traces() {
         final Map<String, Boolean> traces = new HashMap<>();
-        for (final File trace : this.bugFolder.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(final File pathname) {
-                if (!pathname.isFile()) {
-                    return false;
-                }
-                final String fileExtension = FileUtils.getFileExtension(pathname);
-                if (0 != "xml".compareTo(fileExtension)) {
-                    return false;
-                }
-                if (!pathname.getName().matches("^[pf]_.+")) {
-                    return false;
-                }
-                return true;
+        for (final File trace : this.bugFolder.listFiles(pathname -> {
+            if (!pathname.isFile()) {
+                return false;
             }
+            final String fileExtension = FileUtils.getFileExtension(pathname);
+            if (0 != "xml".compareTo(fileExtension)) {
+                return false;
+            }
+            if (!pathname.getName().matches("^[pf]_.+")) {
+                return false;
+            }
+            return true;
         })) {
             final boolean success = trace.getName().matches("^p_.+");
             traces.put(trace.getAbsolutePath(), success);

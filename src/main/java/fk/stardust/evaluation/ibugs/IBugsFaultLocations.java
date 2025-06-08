@@ -21,10 +21,10 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 import fk.stardust.provider.CoberturaProvider;
 import fk.stardust.traces.INode;
@@ -79,11 +79,11 @@ public class IBugsFaultLocations {
      * @throws JDOMException
      */
     private void parse(final java.io.File faultLocationFile) throws JDOMException, IOException {
-        final Document doc = new SAXBuilder().build(faultLocationFile);
+        final SAXBuilder saxBuilder = new SAXBuilder();
+        final Document doc = saxBuilder.build(faultLocationFile);
 
         // loop over all bugs of the real fault locations file
-        for (final Object bugObject : doc.getRootElement().getChildren()) {
-            final Element bug = (Element) bugObject;
+        for (final Element bug : doc.getRootElement().getChildren()) {
 
             // create bug object
             Bug curBug;
@@ -98,9 +98,8 @@ public class IBugsFaultLocations {
 
 
             // get files
-            for (final Object fileObject : bug.getChildren()) {
-                final Element file = (Element) fileObject;
-                final String filename = file.getAttributeValue("name");
+            for (final Element fileElement : bug.getChildren()) {
+                final String filename = fileElement.getAttributeValue("name");
 
                 // ensure we have java extension and no test sources
                 if (filename == null || FileUtils.getFileExtension(filename).compareTo("java") != 0
@@ -114,8 +113,7 @@ public class IBugsFaultLocations {
 
 
                 // get involved lines
-                for (final Object lineObj : file.getChildren()) {
-                    final Element line = (Element) lineObj;
+                for (final Element line : fileElement.getChildren()) {
 
                     // parse line info
                     int lineNumber;

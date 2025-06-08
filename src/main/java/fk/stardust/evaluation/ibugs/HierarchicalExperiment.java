@@ -20,10 +20,10 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 import fk.stardust.evaluation.IExperiment;
 import fk.stardust.localizer.Ranking;
@@ -147,8 +147,8 @@ public class HierarchicalExperiment implements IExperiment {
         }
 
         System.out.println(String.format("Wasted Effort: %d", maxWastedEffort));
-        System.out.println(String.format("Percentage examined: %f", new Double(maxWastedEffort * 100)
-        / new Double(s.getNodes().size())));
+        System.out.println(String.format("Percentage examined: %f", (double) (maxWastedEffort * 100)
+        / (double) (s.getNodes().size())));
         System.out.println(String.format("Last examined node: %s", lastExaminedNode.toString()));
     }
 
@@ -211,11 +211,11 @@ public class HierarchicalExperiment implements IExperiment {
     private Set<INode<String>> getRealFaultLocations(final ISpectra<String> spectra) throws JDOMException, IOException {
         final Set<INode<String>> locations = new HashSet<>();
         final String repository = this.root.getAbsolutePath() + "/repository.xml";
-        final Document doc = new SAXBuilder().build(repository);
+        final SAXBuilder saxBuilder = new SAXBuilder();
+        final Document doc = saxBuilder.build(repository);
 
         // loop over all packages of the trace file
-        for (final Object bugObject : doc.getRootElement().getChildren()) {
-            final Element bug = (Element) bugObject;
+        for (final Element bug : doc.getRootElement().getChildren()) {
 
             // skip irrelevant bugs
             if (this.bugId != Integer.parseInt(bug.getAttributeValue("id"))) {
@@ -223,8 +223,7 @@ public class HierarchicalExperiment implements IExperiment {
             }
 
             // get files
-            for (final Object fileObject : bug.getChild("fixedFiles").getChildren()) {
-                final Element file = (Element) fileObject;
+            for (final Element file : bug.getChild("fixedFiles").getChildren()) {
                 final String filename = file.getAttributeValue("name");
                 final String extension = filename.substring(filename.length() - 5);
                 if (extension.compareTo(".java") != 0 || filename.toLowerCase().indexOf("test") != -1) {

@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 import fk.stardust.traces.HierarchicalSpectra;
 import fk.stardust.traces.ISpectra;
@@ -118,18 +118,17 @@ public class CoberturaProvider implements ISpectraProvider<String>, IHierarchica
             final HierarchicalSpectra<String, String> classSpectra,
             final HierarchicalSpectra<String, String> packageSpectra) throws JDOMException, IOException {
         final IMutableTrace<String> trace = lineSpectra.addTrace(successful);
-        final Document doc = new SAXBuilder().build(file);
+        final SAXBuilder saxBuilder = new SAXBuilder();
+        final Document doc = saxBuilder.build(file);
         final boolean createHierarchicalSpectra = methodSpectra != null && classSpectra != null
                 && packageSpectra != null;
 
         // loop over all packages of the trace file
-        for (final Object pckgObj : doc.getRootElement().getChild("packages").getChildren()) {
-            final Element pckg = (Element) pckgObj;
+        for (final Element pckg : doc.getRootElement().getChild("packages").getChildren()) {
             final String packageName = pckg.getAttributeValue("name");
 
             // loop over all classes of the package
-            for (final Object clssObj : pckg.getChild("classes").getChildren()) {
-                final Element clss = (Element) clssObj;
+            for (final Element clss : pckg.getChild("classes").getChildren()) {
                 final String className = clss.getAttributeValue("filename");
 
                 // if necessary, create hierarchical spectra
@@ -138,8 +137,7 @@ public class CoberturaProvider implements ISpectraProvider<String>, IHierarchica
                 }
 
                 // loop over all methods of the class
-                for (final Object mthdObj : clss.getChild("methods").getChildren()) {
-                    final Element method = (Element) mthdObj;
+                for (final Element method : clss.getChild("methods").getChildren()) {
                     final String methodName = method.getAttributeValue("name") + method.getAttributeValue("signature");
                     final String methodIdentifier = String.format("%s:%s", className, methodName);
 
@@ -149,8 +147,7 @@ public class CoberturaProvider implements ISpectraProvider<String>, IHierarchica
                     }
 
                     // loop over all lines of the method
-                    for (final Object lineObj : method.getChild("lines").getChildren()) {
-                        final Element line = (Element) lineObj;
+                    for (final Element line : method.getChild("lines").getChildren()) {
 
                         // set node involvement
                         final String lineIdentifier = createNodeIdentifier(className, line.getAttributeValue("number"));

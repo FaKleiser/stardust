@@ -28,8 +28,8 @@ public class Tarantula<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        final double part = new Double(node.getIF()) / new Double(node.getIF() + node.getNF());
-        return part / new Double(part + node.getIS() / new Double(node.getIS() + node.getNS()));
+        final double part = (double) node.getIF() / (double) (node.getIF() + node.getNF());
+        return part / (part + (double) node.getIS() / (double) (node.getIS() + node.getNS()));
     }
 
     @Override

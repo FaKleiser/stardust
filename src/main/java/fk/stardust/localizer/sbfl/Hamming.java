@@ -28,7 +28,7 @@ public class Hamming<T> extends AbstractSpectrumBasedFaultLocalizer<T> {
 
     @Override
     public double suspiciousness(final INode<T> node) {
-        return new Double(node.getIF() + node.getNS());
+        return (double) (node.getIF() + node.getNS());
     }
 
     @Override

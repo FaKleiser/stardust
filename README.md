@@ -1,13 +1,11 @@
 # STARDUST
 
 STARDUST is a framework for spectrum-based fault localization (SBFL). 
-The framework was used to conduct experiments with SBFL during my bachelor thesis.
-
+The framework was used to conduct experiments with SBFL during my bachelor thesis and subsequent research.
 
 ## Requirements
 
 This project requires Java 17 or newer to build and run.
-
 
 ## Installation
 
@@ -31,15 +29,22 @@ java -cp stardust-0.0.1.jar fk.stardust.evaluation.sbfl.CreateRankings [args]
 ```
 (Replace `[args]` with any arguments required by the chosen main class.)
 
-
 ## Build Status
 
 ![Build Status](https://github.com/FaKeller/stardust/actions/workflows/ci.yml/badge.svg)
 
 This project uses GitHub Actions to automatically run tests and build the project upon commits and pull requests, ensuring code quality and integration.
 
+## Research Background
 
-## Theoretical Background
+The STARDUST framework served as the experimental platform for the following research publications:
+
+-   **Bachelor's Thesis:** [Systematic Architecture Level Fault Diagnosis Using Statistical Techniques](https://www.fabian-kleiser.de/research/bachelors-thesis/)
+-   **QRS 2017 Paper:** [A Critical Evaluation of Spectrum-Based Fault Localization Techniques on a Large-Scale Software System](https://www.fabian-kleiser.de/research/critical-evaluation-sbfl-techniques/)
+
+These papers delve into the theoretical underpinnings of SBFL, the application of various techniques, and evaluations performed using this framework.
+
+## Theoretical Background (SBFL Overview)
 
 Spectrum-based fault localization (SBFL) can be used to locate faults in a very generic system model.
 In general, all systems that consist of multiple components and provide the ability to track the involvement
@@ -50,6 +55,7 @@ either classified as passing execution, i.e. no error occurred, or as a failing 
 For each execution SBFL needs to know which components are involved or not involved in
 the specific execution. A single execution with its involvement data is generally referred to
 as a passing/failing trace and a set of traces is used as input for SBFL.
+For a more detailed understanding of the framework's specific architecture, see the [Architecture Overview](ARCHITECTURE.md).
 
 ## Framework Architecture
 
@@ -60,6 +66,7 @@ Brief description of the relevant Java namespaces:
 - **localizer**: Implementation of different strategies to localize the faulty component.
 - **evaluation**: A set of classes that were used to run experiments on the [iBugs bug data set](https://www.st.cs.uni-saarland.de/ibugs/).
 
+More details can be found in the [Architecture Overview](ARCHITECTURE.md).
 
 ## Usage
 
@@ -67,10 +74,17 @@ A simplified usage of the framework looks as follows:
 
 ```java
 ISpectraProvider<String> provider = new CoberturaProvider();
-IFaultLocalizer<String> tarantula = new Tarantula();
+IFaultLocalizer<String> tarantula = new Tarantula<>();
 Ranking<String> ranking = tarantula.localize(provider.loadSpectra());
 ranking.save("resulting-ranking.txt");
 ```
+
+## Documentation & Guides
+
+For more in-depth information about the STARDUST framework, please refer to:
+
+-   **[Architecture Overview](ARCHITECTURE.md):** Understand the theoretical background, components (experiments, traces, localizers), and how they interact.
+-   **[Development Guide](DEVELOPMENT_GUIDE.md):** Learn how to extend the framework, such as adding custom localizers or integrating new data sets.
 
 ## Contributing
 
